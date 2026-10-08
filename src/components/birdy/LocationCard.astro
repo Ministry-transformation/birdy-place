@@ -1,0 +1,32 @@
+---
+interface Props {
+  location: {
+    id: string;
+    number: string;
+    name: string;
+    brand: string;
+    address: string;
+    postal: string;
+    description: string;
+    services: string[];
+    booking: string;
+    map: string;
+  };
+}
+
+const { location } = Astro.props as Props;
+---
+<article class="branch-card" id={`branch-${location.id}`}>
+  <div class="branch-card-head"><span class="branch-index" data-i18n={`location.${location.id}.label`}>SEDE {location.number}</span><span class="branch-pin" aria-hidden="true">●</span></div>
+  <p class="branch-brand">{location.brand}</p>
+  <h3>{location.name}</h3>
+  <p class="branch-address" data-i18n={`location.${location.id}.address`}>{location.address}<br />{location.postal}</p>
+  <p class="branch-description" data-i18n={`location.${location.id}.description`}>{location.description}</p>
+  <ul class="branch-services" aria-label={`Servicios de ${location.brand}`} data-i18n-aria-label={`location.${location.id}.aria`}>
+    {location.services.map((service, index) => <li data-i18n={`location.${location.id}.service.${index + 1}`}>{service}</li>)}
+  </ul>
+  <div class="branch-actions">
+    <a class="button button-bright" href={location.booking} target="_blank" rel="noopener noreferrer" data-i18n="location.book">Reservar aquí</a>
+    <a class="button button-outline" href={location.map} target="_blank" rel="noopener noreferrer" aria-label={`Cómo llegar a ${location.address}`} data-i18n="location.map" data-i18n-aria-label="location.mapAria">Cómo llegar</a>
+  </div>
+</article>

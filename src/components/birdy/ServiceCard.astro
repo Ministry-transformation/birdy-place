@@ -1,0 +1,25 @@
+---
+interface Props {
+  service: { number: string; tone: string; symbol: string; name: string; detail: string };
+  booking: string;
+}
+
+const { service, booking } = Astro.props as Props;
+const base = import.meta.env.BASE_URL;
+const serviceImages: Record<string, string> = {
+  '01': 'service-hair.webp',
+  '02': 'service-manicure.webp',
+  '03': 'service-brows.webp',
+  '04': 'salon-campaign.webp',
+  '05': 'service-brows.webp',
+  '06': 'service-hair.webp',
+};
+---
+<article class:list={['service-card', service.tone]}>
+  <div class="service-card-photo"><img src={`${base}${serviceImages[service.number]}`} alt="" aria-hidden="true" loading="lazy" width="960" height="1200" /><span class="service-number">{service.number}</span><span class="service-symbol" aria-hidden="true">{service.symbol}</span></div>
+  <div class="service-card-copy">
+    <h3 data-i18n={`service.${service.number}.name`}>{service.name}</h3>
+    <p data-i18n={`service.${service.number}.detail`}>{service.detail}</p>
+    <a class="service-link" href={booking} target="_blank" rel="noopener noreferrer"><span data-i18n="service.book">Ver menú y reservar</span> <span aria-hidden="true">↗</span></a>
+  </div>
+</article>

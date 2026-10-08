@@ -1,0 +1,174 @@
+---
+import ServiceCard from '../components/birdy/ServiceCard.astro';
+import LocationCard from '../components/birdy/LocationCard.astro';
+import { birdyLocations, birdyServices, birdyPrices } from '../data/birdy';
+import '../styles/birdy.css';
+const base = import.meta.env.BASE_URL;
+const instagram = 'https://www.instagram.com/birdy.bws/';
+const phone = '+34642322165';
+const branchById = Object.fromEntries(birdyLocations.map((location) => [location.id, location]));
+---
+
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#f7f5ef" />
+    <meta name="description" content="Salón de belleza Birdy en Torrevieja. Descubre peluquería, manicura, pedicura, pestañas, cejas, cosmetología y barbería. Consulta servicios y reserva online." data-i18n-content="meta.description" />
+    <title data-i18n="meta.title">Salón de belleza Birdy — Servicios en Torrevieja</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous" />
+    <link rel="preload" as="image" href={`${base}salon-campaign.webp`} fetchpriority="high" />
+  </head>
+  <body class="birdy-site">
+    <a class="skip-link" href="#main" data-i18n="skip">Saltar al contenido</a>
+    <header class="site-header shell">
+      <a class="brand" href="#home" aria-label="Birdy Beauty Workshop, inicio" data-i18n-aria-label="brand.aria">
+        <span class="brand-script">birdy</span><span class="brand-word">BEAUTY<br />SALON</span><span class="brand-heart" aria-hidden="true">♥</span>
+      </a>
+      <div class="header-controls"><button class="language-toggle" type="button" data-language-toggle aria-label="Cambiar idioma a ucraniano" aria-pressed="false" data-i18n-aria-label="language.aria">ES <span aria-hidden="true">/</span> УКР</button><button class="menu-toggle" type="button" aria-expanded="false" aria-controls="primary-nav" data-i18n="nav.menu">Menú</button></div>
+      <nav id="primary-nav" class="primary-nav" aria-label="Navegación principal" data-i18n-aria-label="nav.aria" data-open="false">
+        <a href="#servicios" data-i18n="nav.services">Servicios</a><a href="#sedes" data-i18n="nav.locations">Sedes</a><a href="#instagram">Instagram</a>
+        <a class="button button-dark nav-book" href="https://n1322830.alteg.io/select-city/1223/select-branch?o=" target="_blank" rel="noopener noreferrer" data-i18n="nav.book">Reservar cita</a>
+      </nav>
+    </header>
+
+    <main id="main">
+      <section class="services-first shell" id="servicios" aria-labelledby="services-title">
+        <div class="section-heading reveal">
+          <div><p class="eyebrow"><span class="flag-dot" aria-hidden="true">●</span> BIRDY BEAUTY WORKSHOP · TORREVIEJA</p><h1 id="services-title" data-i18n="services.title">Salón de belleza<br /><em>y servicios.</em></h1></div>
+          <p data-i18n="services.intro">Encuentra tu servicio de belleza y reserva directamente en el menú online de la sede correspondiente.</p>
+        </div>
+        <div class="service-grid">
+          {birdyServices.map((service) => <ServiceCard service={service} booking={branchById[service.location].booking} />)}
+        </div>
+        <div class="services-footer"><span data-i18n="services.footer">Dos sedes · Servicios según ubicación</span><a class="button button-dark" href="#sedes"><span data-i18n="services.choose">Elige sede y reserva</span> <span aria-hidden="true">↗</span></a></div>
+      </section>
+
+      <section class="hero shell brand-intro" id="home" aria-labelledby="hero-title">
+        <div class="hero-copy reveal">
+          <p class="eyebrow" data-i18n="brand.eyebrow">BELLEZA CON ALMA UCRANIANA · ALICANTE</p>
+          <h2 id="hero-title" data-i18n="brand.title">Tu momento<br /><em>Birdy.</em></h2>
+          <p class="hero-lede" data-i18n="brand.intro">Cabello, uñas, mirada, cuidado facial y barbería en dos sedes de Torrevieja. Elige un servicio y consulta los detalles actualizados en Altegio.</p>
+          <div class="hero-actions">
+            <a class="button button-dark" href="#sedes"><span data-i18n="brand.choose">Ver sedes y reservar</span> <span aria-hidden="true">↗</span></a>
+            <a class="text-link" href={instagram} target="_blank" rel="noopener noreferrer" data-i18n="brand.instagram">Ver trabajos reales en Instagram</a>
+          </div>
+          <div class="hero-facts" aria-label="Información rápida" data-i18n-aria-label="facts.aria"><span data-i18n="facts.locations">2 sedes</span><span data-i18n="facts.online">Reserva online</span><span data-i18n="facts.hours">Lun–sáb · 10:00–20:00*</span></div>
+        </div>
+        <figure class="hero-visual reveal">
+          <img src={`${base}salon-campaign.webp`} alt="Imagen ilustrativa de una clienta durante el peinado en un salón; no es una fotografía de Birdy ni de sus trabajos." data-i18n-alt="image.beautyAlt" width="1600" height="1200" fetchpriority="high" />
+          <figcaption><span class="visual-star" aria-hidden="true">✳</span> <span data-i18n="image.caption">Belleza y cuidado personal</span> <small data-i18n="image.note">Imagen ilustrativa</small></figcaption>
+          <span class="visual-stamp" aria-hidden="true">BIRDY<br /><i>✦</i><br />BEAUTY</span>
+        </figure>
+      </section>
+
+      <section class="price-section shell" aria-labelledby="prices-title">
+        <div class="price-intro reveal">
+          <p class="eyebrow" data-i18n="prices.eyebrow">PRECIOS PUBLICADOS EN ALTEGIO</p>
+          <h2 id="prices-title" data-i18n="prices.title">Una idea clara<br />antes de reservar.</h2>
+          <p data-i18n="prices.intro">Estos ejemplos aparecen en el menú online de cada sede. El precio final, los extras y los materiales se confirman en el servicio elegido.</p>
+          <a class="text-link" href="#sedes" data-i18n="prices.link">Ver los dos menús de reserva</a>
+        </div>
+        <div class="price-list reveal">
+          {birdyPrices.map((item) => <a class="price-row" href={item.href} target="_blank" rel="noopener noreferrer"><span><strong data-i18n={`price.${String(birdyPrices.indexOf(item) + 1).padStart(2, '0')}.service`}>{item.service}</strong><small data-i18n={`price.${String(birdyPrices.indexOf(item) + 1).padStart(2, '0')}.location`}>{item.location}</small></span><b>{item.price}</b><span class="price-arrow" aria-hidden="true">↗</span></a>)}
+          <p class="price-note" data-i18n="prices.note">Menús consultados el 8 de octubre de 2026. Precios y disponibilidad pueden cambiar. En coloración, los materiales se cobran aparte según el menú de La Paz.</p>
+        </div>
+      </section>
+
+      <section class="branches-section" id="sedes" aria-labelledby="branches-title">
+        <div class="shell branches-inner">
+          <div class="section-heading section-heading-light reveal">
+            <div><p class="eyebrow" data-i18n="branches.eyebrow">DOS DIRECCIONES · DOS MENÚS</p><h2 id="branches-title" data-i18n="branches.title">¿Dónde nos<br /><em>vemos?</em></h2></div>
+            <p data-i18n="branches.intro">La reserva se abre en el catálogo online de la sede elegida para que puedas comprobar sus servicios y horarios disponibles.</p>
+          </div>
+          <div class="branch-grid">
+            {birdyLocations.map((location) => <LocationCard location={location} />)}
+          </div>
+          <p class="hours-note" data-i18n="branches.hours">*El perfil de Instagram indica atención de lunes a sábado, de 10:00 a 20:00. Confirma el horario de tu sede antes de ir.</p>
+        </div>
+      </section>
+
+      <section class="instagram-section shell" id="instagram" aria-labelledby="instagram-title">
+        <div class="instagram-art reveal"><img src={`${base}service-brows.webp`} alt="Imagen ilustrativa de un tratamiento de cejas; no es una fotografía de Birdy ni de sus trabajos." data-i18n-alt="image.detailAlt" loading="lazy" width="960" height="1200" /><span>BEAUTY<br />IS<br />YOU</span></div>
+        <div class="instagram-copy reveal">
+          <p class="eyebrow">@BIRDY.BWS</p><h2 id="instagram-title" data-i18n="instagram.title">El trabajo real,<br /><em>en nuestro Instagram.</em></h2>
+          <p data-i18n="instagram.intro">Explora el equipo, los servicios, las últimas publicaciones y las opiniones directamente en el perfil oficial.</p>
+          <a class="button button-blue" href={instagram} target="_blank" rel="noopener noreferrer"><span data-i18n="instagram.link">Ver @birdy.bws</span> <span aria-hidden="true">↗</span></a>
+        </div>
+      </section>
+
+      <section class="faq-section shell" aria-labelledby="faq-title">
+        <div class="faq-heading reveal"><p class="eyebrow" data-i18n="faq.eyebrow">ANTES DE TU CITA</p><h2 id="faq-title" data-i18n="faq.title">Lo que conviene saber.</h2></div>
+        <div class="faq-list reveal">
+          <details><summary data-i18n="faq.q1">¿Cómo reservo una cita?</summary><p data-i18n="faq.a1">Elige La Paz o Caballero de Rodas y abre su menú de Altegio. Allí puedes consultar el catálogo de la sede y continuar con el proceso de reserva.</p></details>
+          <details><summary data-i18n="faq.q2">¿Qué servicios hay en cada sede?</summary><p data-i18n="faq.a2">La Paz publica peluquería, manicura y pedicura, pestañas y cejas, cosmetología y depilación. Caballero de Rodas muestra su propio menú de barbería. Revisa el catálogo online para los detalles actuales.</p></details>
+          <details><summary data-i18n="faq.q3">¿Los precios de la web son definitivos?</summary><p data-i18n="faq.a3">Los ejemplos reflejan el menú online consultado el 8 de octubre de 2026. Algunos servicios tienen rangos de precio o materiales adicionales; confirma el total en Altegio al elegir el servicio.</p></details>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="shell footer-main"><a class="brand footer-brand" href="#home" aria-label="Birdy Beauty Workshop, inicio" data-i18n-aria-label="brand.aria"><span class="brand-script">birdy</span><span class="brand-word">BEAUTY<br />SALON</span><span class="brand-heart" aria-hidden="true">♥</span></a><p data-i18n="footer.tagline">Belleza con alma ucraniana.<br />Dos sedes en Torrevieja.</p><div class="footer-links"><a href={instagram} target="_blank" rel="noopener noreferrer">Instagram</a><a href={`tel:${phone}`}>+34 642 322 165</a></div></div>
+      <div class="shell footer-bottom"><span>© {new Date().getFullYear()} Birdy Beauty Workshop</span><span data-i18n="footer.note">Las imágenes editoriales son ilustrativas.</span><span><span data-i18n="footer.credit">Sitio web desarrollado por</span> <a href="https://ministry-transformation.github.io/" target="_blank" rel="noopener noreferrer">Ministerio de Transformación ↗</a></span></div>
+    </footer>
+    <a class="mobile-booking" href="https://n1322830.alteg.io/select-city/1223/select-branch?o=" target="_blank" rel="noopener noreferrer"><span data-i18n="nav.mobileBook">Reservar cita en Altegio</span> <span aria-hidden="true">↗</span></a>
+
+    <script>
+      import { birdyTranslations } from '../data/birdy-translations';
+      const languageButton = document.querySelector('[data-language-toggle]');
+      type Locale = 'es' | 'uk';
+      const applyLanguage = (locale: Locale) => {
+        const copy = birdyTranslations[locale] as Record<string, string>;
+        document.documentElement.lang = locale;
+        document.querySelectorAll<HTMLElement>('[data-i18n]').forEach((element) => {
+          const value = copy[element.dataset.i18n ?? ''];
+          if (value) element.innerHTML = value;
+        });
+        document.querySelectorAll<HTMLElement>('[data-i18n-content]').forEach((element) => {
+          const value = copy[element.dataset.i18nContent ?? ''];
+          if (value) element.setAttribute('content', value);
+        });
+        document.querySelectorAll<HTMLElement>('[data-i18n-alt]').forEach((element) => {
+          const value = copy[element.dataset.i18nAlt ?? ''];
+          if (value) element.setAttribute('alt', value);
+        });
+        document.querySelectorAll<HTMLElement>('[data-i18n-aria-label]').forEach((element) => {
+          const value = copy[element.dataset.i18nAriaLabel ?? ''];
+          if (value) element.setAttribute('aria-label', value);
+        });
+        if (copy['meta.title']) document.title = copy['meta.title'];
+        languageButton?.setAttribute('aria-pressed', String(locale === 'uk'));
+        try { localStorage.setItem('birdy-language', locale); } catch { /* Storage may be unavailable in private browsing. */ }
+      };
+      languageButton?.addEventListener('click', () => {
+        const nextLanguage: Locale = document.documentElement.lang === 'es' ? 'uk' : 'es';
+        applyLanguage(nextLanguage);
+      });
+      try {
+        const savedLanguage = localStorage.getItem('birdy-language');
+        if (savedLanguage === 'uk' || savedLanguage === 'es') applyLanguage(savedLanguage);
+      } catch { /* Keep Spanish when storage is unavailable. */ }
+
+      const menuButton = document.querySelector('.menu-toggle');
+      const navigation = document.querySelector('#primary-nav');
+      menuButton?.addEventListener('click', () => {
+        const open = menuButton.getAttribute('aria-expanded') !== 'true';
+        menuButton.setAttribute('aria-expanded', String(open));
+        navigation?.setAttribute('data-open', String(open));
+      });
+      navigation?.querySelectorAll('a').forEach((link) => link.addEventListener('click', () => {
+        menuButton?.setAttribute('aria-expanded', 'false');
+        navigation?.setAttribute('data-open', 'false');
+      }));
+      const revealItems = document.querySelectorAll('.reveal');
+      if ('IntersectionObserver' in window && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+        const observer = new IntersectionObserver((entries, activeObserver) => entries.forEach((entry) => {
+          if (entry.isIntersecting) { entry.target.classList.add('is-visible'); activeObserver.unobserve(entry.target); }
+        }), { threshold: 0.12 });
+        revealItems.forEach((item) => observer.observe(item));
+      } else revealItems.forEach((item) => item.classList.add('is-visible'));
+    </script>
+  </body>
+</html>
